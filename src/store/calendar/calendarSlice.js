@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import { addHours } from "date-fns";
 const temEvent = {
   _id: new Date().getTime(),
-  title: "Bombardear Peru",
-  notes: "Lista de compras: 3 Nucleares",
+  title: "Mejorar mi portafolio",
+  notes: "Comprar un dominio y mejorar el diseño",
   start: new Date(),
   end: addHours(new Date(), 2),
   user: {

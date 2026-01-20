@@ -1,18 +1,24 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { LoginPage } from "../auth";
 import { CalendarPages } from "../calendar/pages/CalendarPages";
+import { useAuthStore } from "../hooks";
 
 export const AppRouter = () => {
-  const authStatus = "authenticated";
+  const { status } = useAuthStore();
+
   return (
     <Routes>
-      {authStatus === "not-authenticated" ? (
-        <Route path="/auth/*" element={<LoginPage />} />
+      {status === "not-authenticated" ? (
+        <>
+          <Route path="/auth/*" element={<LoginPage />} />
+          <Route path="/*" element={<Navigate to="/auth/login" />} />
+        </>
       ) : (
-        <Route path="/*" element={<CalendarPages />} />
+        <>
+          <Route path="/*" element={<CalendarPages />} />
+          <Route path="/auth/*" element={<Navigate to="/" />} />
+        </>
       )}
-
-      <Route path="/*" element={<Navigate to="auth/login" />} />
     </Routes>
   );
 };
